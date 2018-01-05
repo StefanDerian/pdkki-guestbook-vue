@@ -23,7 +23,7 @@ export default new Router({
 	},
 	{
 		path: '*' ,
-		redirect: '/login'
+		redirect: '/'
 	},
 	{
 		path: '/form' ,
@@ -42,6 +42,6 @@ export default new Router({
 		}
 	},
 	],
-	mode: 'history',
-	fallback: false,
+	mode: "history",
+	fallback: true,
 })

@@ -69,7 +69,6 @@ router.beforeEach((to,from,next) => {
 
 
 
-
 Firebase.auth().onAuthStateChanged(function(user) {
 
 
@@ -77,7 +76,6 @@ Firebase.auth().onAuthStateChanged(function(user) {
 		el: '#app',
 		router,
 		store,
-		template: '<App/>',
-		components: { App }
+		render: h => h(App)
 	})
 })
