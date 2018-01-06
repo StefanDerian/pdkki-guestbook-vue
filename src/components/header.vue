@@ -12,16 +12,16 @@
 			</div>
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li v-if = "currentUser!==null">
-						<router-link  router-link :to="{ path: 'form' }">Guest Form</router-link>
+					<li v-if = "this.$root.user.uid">
+						<router-link :to="{ path: 'form' }">Guest Form</router-link>
 					</li>
-					<li v-if = "currentUser!==null">
+					<li v-if = "this.$root.user.uid">
 						<router-link :to="{ path: 'list' }">Guest List</router-link>
 					</li>
 					
 				</ul>
 				<ul class="nav navbar-right">
-					<li v-if = "currentUser!==null">
+					<li v-if = "this.$root.user.uid">
 						<a class="btn btn-danger"href = "#" @click="logout">Logout</a>
 					</li>
 				</ul>
@@ -45,9 +45,7 @@ export default {
 	},
 	methods:{
 		logout(){
-			Firebase.auth().signOut().then(() => {
-				this.$router.replace('login')
-			})
+			Firebase.auth().signOut()
 		}
 	},
 	

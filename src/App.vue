@@ -31,18 +31,18 @@ export default {
   firebase: {
     guests: db.ref('Guests')
   },
-  methods: {
-    ...mapActions([
-      'getAllGuests', // map `this.increment()` to `this.$store.dispatch('increment')`
-      ]),
+  // methods: {
+  //   ...mapActions([
+  //     'getAllGuests', // map `this.increment()` to `this.$store.dispatch('increment')`
+  //     ]),
 
-  },
-  created(){
-    console.log('app created')
+  // },
+  // created(){
+  //   console.log('app created')
 
-    this.getAllGuests(this.guests)
+  //   this.getAllGuests(this.guests)
 
-  }
+  // }
 }
 </script>
 

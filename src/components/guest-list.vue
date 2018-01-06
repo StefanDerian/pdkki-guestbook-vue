@@ -97,11 +97,16 @@
 
 <script>
 import { db } from '../mixin/firebase'
-import { mapGetters } from 'vuex'
-import GuestForm from './guest-form.vue'
-import Message  from './message/message.vue'
+import { mapGetters, mapActions } from 'vuex'
+//import GuestForm from './guest-form.vue'
+// import Message  from './message/message.vue'
 import {Pagination} from 'vue-pagination-2'
-import Firebase from 'firebase'
+// import Firebase from 'firebase'
+
+
+const GuestForm = () => import('./guest-form.vue')
+const Message = () => import('./message/message.vue')
+const Firebase = () => import('firebase')
 
 export default {
 	
@@ -130,6 +135,10 @@ export default {
 		}
 	},
 	methods:{
+		...mapActions([
+			'getAllGuests', 
+      // map `this.increment()` to `this.$store.dispatch('increment')`
+      ]),
 		deleteGuest(guest){
 			this.$firebaseRefs.guests.child(guest['.key']).remove()
 			this.closeDeleteGuest()
@@ -302,36 +311,43 @@ export default {
 			this.resetPage()
 		}
 	},
-	filters:{
-		getBirthdayMonth: function(guests){
-			return guests.filter(function(guest){
+	// filters:{
+	// 	getBirthdayMonth: function(guests){
+	// 		return guests.filter(function(guest){
 
-				var nowMonth = new Date()
+	// 			var nowMonth = new Date()
 
-				nowMonth = nowMonth.getMonth()
+	// 			nowMonth = nowMonth.getMonth()
 
-				var guestMonth = new Date(guest['birthday'])
-				guestMonth = guestMonth.getMonth()
+	// 			var guestMonth = new Date(guest['birthday'])
+	// 			guestMonth = guestMonth.getMonth()
 
-				return guestMonth === nowMonth
-
-
-			})
-		}
+	// 			return guestMonth === nowMonth
 
 
+	// 		})
+	// 	}
 
+
+
+	// },
+	created(){
+		 this.getAllGuests(this.guests)
 	},
+
 	mounted(){
-		this.paginationComp = this.$parent.$refs.pagination
+		//this.paginationComp = this.$parent.$refs.pagination
+		console.log('list mounted')
 	}
 }
 </script>
 
+
+
 <style lang="css" scoped>
 table{
-    table-layout: fixed;
-    white-space: normal;
+	table-layout: fixed;
+	white-space: normal;
 }
 td{
 	word-wrap:break-word

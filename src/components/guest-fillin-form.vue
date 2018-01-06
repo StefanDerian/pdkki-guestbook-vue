@@ -58,7 +58,7 @@ export default {
 			this.flag = -1,
 			this.msg = ""
 		},5000)
-
+		
 	}
 
 

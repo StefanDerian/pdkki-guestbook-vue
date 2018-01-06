@@ -53,8 +53,46 @@ Vue.config.productionTip = false
 /* eslint-disable no-new */
 
 
+
+
+
+
+// Firebase.auth().onAuthStateChanged(function(user) {
+
+
+	var vm = new Vue({
+		el: '#app',
+		router,
+		store,
+		data: {
+			loading: true,
+			user: null,
+			items: [],
+			item: ''
+		},
+		beforeCreate(){
+			Firebase.auth().onAuthStateChanged((user) => {
+				if (user) {
+					this.user = user
+					this.$router.replace('list')
+				}else{
+					this.user = {}
+					this.$router.replace('login')
+				}
+			})
+		},
+		created(){
+			console.log('main created')
+
+
+
+		},
+		render: h => h(App)
+	})
+// })
+
 router.beforeEach((to,from,next) => {
-	let currentUser = Firebase.auth().currentUser
+	let currentUser = vm.user
 	let requiresAuth = to.matched.some(record => record.meta.requiresAuth)
 
 	if(requiresAuth && !currentUser) 
@@ -65,17 +103,4 @@ router.beforeEach((to,from,next) => {
 		next()
 
 
-})
-
-
-
-Firebase.auth().onAuthStateChanged(function(user) {
-
-
-	new Vue({
-		el: '#app',
-		router,
-		store,
-		render: h => h(App)
-	})
 })

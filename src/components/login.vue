@@ -16,7 +16,7 @@
 				<input type="submit" class="btn btn-primary btn-lg" value="login">
 			</form>
 		</div>
-		
+		{{user}}
 	</div>
 </template>
 
@@ -30,20 +30,27 @@ export default {
 		return {
 			email:"",
 			password:"",
-			error:""
+			error:"",
+			user: Firebase.auth().currentUser
+			
 		}
 	},
 	methods:{
 		onSubmit(){
 			Firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(
 				(user) =>{
-					this.$router.replace('list')
+					console.log(user)
+					//this.user = user
+					//this.$router.push({ path: 'list' })
 					// this.user = Firebase.auth();
+					//this.$router.replace('list')
 				},
 				(err) => {
 					this.error = "Oops "+err
 				}
 				)
+
+			// this.$router.push({ path: 'list' })
 
 		}
 	}

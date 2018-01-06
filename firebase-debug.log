@@ -1,0 +1,32 @@
+[debug] [2018-01-06T04:34:49.355Z] ----------------------------------------------------------------------
+[debug] [2018-01-06T04:34:49.357Z] Command:       C:\Program Files\nodejs\node.exe C:\Program Files\nodejs\node_modules\firebase-tools\bin\firebase serve
+[debug] [2018-01-06T04:34:49.357Z] CLI Version:   3.16.0
+[debug] [2018-01-06T04:34:49.357Z] Platform:      win32
+[debug] [2018-01-06T04:34:49.357Z] Node Version:  v8.1.2
+[debug] [2018-01-06T04:34:49.357Z] Time:          Sat Jan 06 2018 15:34:49 GMT+1100 (AUS Eastern Daylight Time)
+[debug] [2018-01-06T04:34:49.357Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-01-06T04:34:49.370Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-01-06T04:34:49.370Z] > authorizing via signed-in user
+[debug] [2018-01-06T04:34:49.372Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/pdkki-9d850  
+  
+ Sat Jan 06 2018 15:34:49 GMT+1100 (AUS Eastern Daylight Time)
+[debug] [2018-01-06T04:34:50.906Z] <<< HTTP RESPONSE 200
+[debug] [2018-01-06T04:34:50.907Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/pdkki-9d850/tokens  
+  
+ Sat Jan 06 2018 15:34:50 GMT+1100 (AUS Eastern Daylight Time)
+[debug] [2018-01-06T04:34:51.789Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from 'D:\web project\pdkki-guestbook-vue3'...
+[info] 
+[debug] [2018-01-06T04:34:51.794Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/pdkki-9d850  
+  
+ Sat Jan 06 2018 15:34:51 GMT+1100 (AUS Eastern Daylight Time)
+[debug] [2018-01-06T04:34:53.335Z] <<< HTTP RESPONSE 200
+[debug] [2018-01-06T04:34:53.336Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/521954924171/clients/_:getWebAppConfig  
+  
+ Sat Jan 06 2018 15:34:53 GMT+1100 (AUS Eastern Daylight Time)
+[debug] [2018-01-06T04:34:54.795Z] <<< HTTP RESPONSE 200
+[info] i  hosting: Serving hosting files from: dist
+[info] +  hosting: Local server: http://localhost:5000
+
