@@ -12,17 +12,17 @@
 			</div>
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li v-if = "this.$root.user.uid">
+					<li v-if = "this.$root.user">
 						<router-link :to="{ path: 'form' }">Guest Form</router-link>
 					</li>
-					<li v-if = "this.$root.user.uid">
+					<li v-if = "this.$root.user">
 						<router-link :to="{ path: 'list' }">Guest List</router-link>
 					</li>
 					
 				</ul>
 				<ul class="nav navbar-right">
-					<li v-if = "this.$root.user.uid">
-						<a class="btn btn-danger"href = "#" @click="logout">Logout</a>
+					<li v-if = "this.$root.user">
+						<a class="btn btn-danger" href = "#" @click="logout">Logout</a>
 					</li>
 				</ul>
 			</div>

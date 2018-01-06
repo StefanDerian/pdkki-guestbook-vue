@@ -76,7 +76,7 @@ Vue.config.productionTip = false
 					this.user = user
 					this.$router.replace('list')
 				}else{
-					this.user = {}
+					this.user = null
 					this.$router.replace('login')
 				}
 			})
