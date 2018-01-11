@@ -309,6 +309,9 @@ export default {
 		},
 		birthdayFilter: function(){
 			this.resetPage()
+		},
+		keyword:function(){
+			this.resetPage()
 		}
 	},
 	// filters:{

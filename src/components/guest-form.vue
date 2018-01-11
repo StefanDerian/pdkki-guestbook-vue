@@ -50,8 +50,8 @@
 				<div class="form-group row">
 					<label for="inputPassword3" class="col-md-3 col-sm-12 control-label">Description:</label>
 					<div class="col-md-6 col-sm-12">
-						<textarea v-validate="'min:20'" class="form-control " rows="5" id="comment" name="description" v-model="client.description" placeholder="Hobby, Kuliah atau Kerja bagian apa ..."></textarea>
-						<span v-show="errors.has('description')" class="help is-danger">{{ errors.first('description') }}</span>
+						<textarea  class="form-control " rows="5" id="comment" name="description" v-model="client.description" placeholder="Hobby, Kuliah atau Kerja bagian apa ..."></textarea>
+						<!-- <span v-show="errors.has('description')" class="help is-danger">{{ errors.first('description') }}</span> -->
 					</div>
 				</div>
 
@@ -97,7 +97,7 @@ export default {
 				name: '', 
 				nickname:'',
 				phone:'',
-				birthday:'',
+				birthday:'1990-01-01T13:00:00.000Z',
 				description:''
 			},
 			originalClient: {...this.client}
