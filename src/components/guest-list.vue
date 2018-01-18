@@ -114,6 +114,7 @@
 import { db } from '../mixin/firebase'
 import { mapGetters, mapActions } from 'vuex'
 //import GuestForm from './guest-form.vue'
+import GuestDetail from './guest-detail.vue'
 // import Message  from './message/message.vue'
 import {Pagination} from 'vue-pagination-2'
 
@@ -121,7 +122,7 @@ import {Pagination} from 'vue-pagination-2'
 
 
 const GuestForm = () => import('./guest-form.vue')
-const GuestDetail = () => import('./guest-detail.vue')
+// const GuestDetail = () => import('./guest-detail.vue')
 const Message = () => import('./message/message.vue')
 const Firebase = () => import('firebase')
 
