@@ -12,23 +12,23 @@
 		<div class="row">
 			<form v-on:submit.prevent="onSubmit">
 				<div class="form-group row" style="text-align:center;">
-					<label for="inputEmail3" class="col-md-3 col-sm-12 control-label">Name:</label>
+					<label for="inputEmail3" class="col-md-3 col-sm-12 control-label">Full Name:</label>
 					<div class="col-md-6 col-sm-12">
 						<input type="text" v-validate="'required'"  name="name"  class="form-control" id="inputEmail3" v-model="client.name"  placeholder="Nama Lengkap ..." >
 						<span v-show="errors.has('name')" class="help is-danger">{{ errors.first('name') }}</span>
 					</div>
 				</div>
 				<div class="form-group row">
-					<label for="inputPassword3" class="col-md-3 col-sm-12 control-label">Nick Name:</label>
+					<label for="inputPassword3" class="col-md-3 col-sm-12 control-label">Email:</label>
 					<div class="col-md-6 col-sm-12">
-						<input type="text" class="form-control " v-model="client.nickname" id="inputPassword3"  placeholder="Nama panggilan ..." >
+						<input type="email" v-validate="'required|email'"  class="form-control " v-model="client.email" id="inputPassword3"  placeholder="Email mu...." >
 					</div>
 				</div>
 				<div class="form-group row">
 					<label for="inputPassword3" class="col-md-3 col-sm-12 control-label">Birthday:</label>
 					<div class="col-md-6 col-sm-12">
 						<div class="form-group">
-							<DatePicker v-model="client.birthday" lang="en" v-validate="'required|'" name="dob">
+							<DatePicker v-model="client.birthday" lang="en" v-validate="'required|'" name="dob" format="MMMM dd, yyyy">
 								
 							</DatePicker>
 							<span v-show="errors.has('dob')" class="help is-danger">{{ errors.first('dob') }}</span>
@@ -79,6 +79,7 @@
 import DatePicker from 'vue2-datepicker';
 import { mapState, mapMutations, mapGetters, mapActions } from 'vuex'
 import { SuccessModal } from './modal/success-modal.vue'
+import Moment from 'moment'
 "use strict"
 
 // import db from '../mixin/firebase'
@@ -95,7 +96,7 @@ export default {
 			flag :-1,
 			client:{
 				name: '', 
-				nickname:'',
+				email:'',
 				phone:'',
 				birthday:'1990-01-01T13:00:00.000Z',
 				description:''
@@ -113,32 +114,29 @@ export default {
 		}
 	},
 
-// 	created: function () {
-//     // `this` points to the vm instance
-//     console.log('form created')
-// },
-computed: mapState({
-    // arrow functions can make the code very succinct!
-    count: state => state.count,
 
-    // passing the string value 'count' is same as `state => state.count`
-    countAlias: 'count'
-}),
-// firebase: {
-// 	guests: db.ref('Guests')
-// },
-computed: {
-    // mix the getters into computed with object spread operator
-    ...mapGetters([
-    	'allGuests'
-      // ...
-      ])
-    
+	computed: mapState({
+    	// arrow functions can make the code very succinct!
+    	count: state => state.count,
 
-},
-methods: {
+   		// passing the string value 'count' is same as `state => state.count`
+   		countAlias: 'count'
+   	}),
+	// firebase: {
+	// 	guests: db.ref('Guests')
+	// },
+	computed: {
+	    // mix the getters into computed with object spread operator
+	    ...mapGetters([
+	    	'allGuests'
+	      // ...
+	      ])
+	    
 
-	
+	},
+	methods: {
+
+		
 		waitFor(value,time){
 			return new Promise(resolve => {
 				setTimeout(() => {
@@ -147,54 +145,54 @@ methods: {
 			})
 		},
 		onSubmit () {
-		// console.log(this.client);
-		// this.increment()
-		// console.log(this.$store.getters.getCount)
-		this.$validator.validateAll().then(res=>{
-			if(res) {
-				
+			// console.log(this.client);
+			// this.increment()
+			// console.log(this.$store.getters.getCount)
+			this.$validator.validateAll().then(res=>{
+				if(res) {
+					
 
-				if(typeof(this.client.birthday) != "string")
-					this.client.birthday = this.client.birthday.toDateString()
+					if(typeof(this.client.birthday) != "string")
+						this.client.birthday = this.client.birthday.toDateString()
 
 
-				this.$emit('submit-form',this.client)
-				// this.$store.dispatch('addGuest',this.client)
+					this.$emit('submit-form',this.client)
+					// this.$store.dispatch('addGuest',this.client)
 
-				if(this.type1 === "create")
-					this.resetData()
-				
+					if(this.type1 === "create")
+						this.resetData()
+					
 
-			} else {
-				alert('Please correct all error!')
-			}
-		})
-	},
+				} else {
+					alert('Please correct all error!')
+				}
+			})
+		},
 	
-	async resetData(){
+		async resetData(){
 
-		this.client = {...this.originalClient}
-		
-		setTimeout(() => {
-			this.$validator.reset()
-		},500)
-		
-		
+			this.client = {...this.originalClient}
+			
+			setTimeout(() => {
+				this.$validator.reset()
+			},500)
+			
+			
+
+		}
+
+
+
+	},
+	watch:{
+		guest: function(newGuest){
+
+			var newGuest1 = {...newGuest}
+			this.client = newGuest1
+			this.originalClient = newGuest1
+		}
 
 	}
-
-
-
-},
-watch:{
-	guest: function(newGuest){
-
-		var newGuest1 = {...newGuest}
-		this.client = newGuest1
-		this.originalClient = newGuest1
-	}
-
-}
 
 }
 

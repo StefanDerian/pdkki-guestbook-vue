@@ -26,7 +26,7 @@
 				<ul class="dropdown-menu" >
 					<!-- <li ><a href="#" @click = "sort('birthday')">This Month Birthday</a></li> -->
 					<li ><a href="#" @click = "sort('name')">Name</a></li>
-					<li><a href="#" @click = "sort('nickname')">Nick Name</a></li>
+					<!-- <li><a href="#" @click = "sort('nickname')">Nick Name</a></li> -->
 				</ul>
 			</div>
 		</div>
@@ -39,18 +39,20 @@
 				<tbody>
 					<tr>
 						<th>Name</th>
-						<th>Nick Name</th>
+						<!-- <th>Nick Name</th> -->
 						<th>Phone Number</th>
 						<th>Birthday</th>
-						<th>Description</th>
+						<!-- <th>Description</th> -->
 					</tr>
 					<!-- ngRepeat: person in tempPeople | orderBy:myOrderBy -->
 					<tr align ="left" v-for="guest of computedGuest">
 						<td>{{guest.name}}</td>
-						<td>{{guest.nickname}}</td>
+						<!-- <td>{{guest.email}}</td> -->
 						<td>{{guest.phone}}</td>
+						<!-- kalau bisa birthdaynya tolong ganti format-->
 						<td>{{guest.birthday}}</td>
-						<td class = "col-description">{{guest.description}}</td>
+						<!-- <td class = "col-description">{{guest.description}}</td> -->
+						<td><button class = "btn btn-md btn-primary" @click="showDetailModal(guest)">View</button></td>
 						<td><button class = "btn btn-md btn-warning" @click="showEditModal(guest)">Edit</button></td>
 						<td><button class ="btn btn-md btn-danger" @click="deleteGuestModal(guest)">Delete</button></td>
 
@@ -65,6 +67,18 @@
 	<div class = "row">
 		<pagination ref = "pagination" align="center" for="computedGuest" :records="pageSize" :per-page="perPage" @paginate="setPage"></pagination>
 	</div>
+	<bootstrap-modal ref="detailModal" :need-header="true" :need-footer="false" :size="'large'">
+		<div slot="title">
+			Guest Detail
+		</div>
+		<div slot="body">
+			<guest-detail :guest="guestDetail"></guest-detail>
+		</div>
+		<div slot="footer">
+			Your footer here
+		</div>
+	</bootstrap-modal>
+
 	<bootstrap-modal ref="editModal" :need-header="true" :need-footer="false" :size="'large'">
 		<div slot="title">
 			Edit the guest data
@@ -76,6 +90,7 @@
 			Your footer here
 		</div>
 	</bootstrap-modal>
+
 	<bootstrap-modal ref="deleteModal" :need-header="true" :need-footer="true" :size="'large'">
 		<div slot="title">
 			Delete Confirmation
@@ -101,10 +116,12 @@ import { mapGetters, mapActions } from 'vuex'
 //import GuestForm from './guest-form.vue'
 // import Message  from './message/message.vue'
 import {Pagination} from 'vue-pagination-2'
+
 // import Firebase from 'firebase'
 
 
 const GuestForm = () => import('./guest-form.vue')
+const GuestDetail = () => import('./guest-detail.vue')
 const Message = () => import('./message/message.vue')
 const Firebase = () => import('firebase')
 
@@ -118,7 +135,8 @@ export default {
 		'guest-form': GuestForm,
 		'bootstrap-modal': require('vue2-bootstrap-modal'),
 		'pagination': Pagination,
-		'message':Message
+		'message':Message,
+		'guest-detail':GuestDetail
 	},
 	data () {
 		return {
@@ -137,19 +155,23 @@ export default {
 	methods:{
 		...mapActions([
 			'getAllGuests', 
-      // map `this.increment()` to `this.$store.dispatch('increment')`
-      ]),
+      		// map `this.increment()` to `this.$store.dispatch('increment')`
+      		]),
+		//function for deleting a guest data from firebase
 		deleteGuest(guest){
 			this.$firebaseRefs.guests.child(guest['.key']).remove()
 			this.closeDeleteGuest()
 		},
+		//function for showing confirmation modal
 		deleteGuestModal(guest){
 			this.guestDetail = guest
 			this.$refs["deleteModal"].open()
 		},
+		//function for closing confirmation modal
 		closeDeleteGuest(){
 			this.$refs["deleteModal"].close()
 		},
+		//function for updating the guest data on firebase based on the key provided
 		updateGuest(guest){
 			var guest1 = {...guest}
 			delete guest1['.key']
@@ -166,14 +188,25 @@ export default {
 			},5000)
 			this.closeEditModal()
 		},
+		// function for showing a modal
+		showDetailModal(guest){
+			this.guestDetail = guest
+			this.$refs["detailModal"].open()
+		},
+		// function for closing a modal
+		closeDetailModal(){
+			this.$refs["detailModal"].close()
+		},
+		// function for showing a modal
 		showEditModal(guest){
 			this.guestDetail = guest
 			this.$refs["editModal"].open()
 		},
+		// function for closing a modal
 		closeEditModal(){
 			this.$refs["editModal"].close()
 		},
-
+		// function for sorting based on the key
 		sort(key,order = "desc"){
 
 
@@ -223,6 +256,7 @@ export default {
 			 	);
 			};
 		},
+		//function for adjusting pagination
 		setPage(page) {
 			var pageIndex = (page - 1) * this.perPage
 			var perPageIndex = (page * this.perPage) - 1
@@ -230,6 +264,7 @@ export default {
 			this.firstGuestIndex = pageIndex
 			this.lastGuestIndex = perPageIndex
 		},
+		//function for reseting pagination back to 0 by reseting the page parametre
 		resetPage(){
 			this.$refs["pagination"].setPage(1)
 			this.firstGuestIndex = 0
@@ -239,13 +274,16 @@ export default {
 	},
 	// mix the getters into computed with object spread operator
 	computed: {
-
+		//mapping the things in vuex into this component
 		...mapGetters([
 			'allGuests',
 			'getGuestsSize'
 			
 
 			]),
+
+
+		//function for handling the sorting, searching, and keywords
 		computedGuest: function(){
 
 			var computedGuests = this.allGuests.sort(this.compareValues(this.sortKey))
@@ -274,7 +312,7 @@ export default {
 			if(keyword !== ""){
 				computedGuests = computedGuests.filter(function(guest){
 					var re = '(?:^|\W)'+keyword+'(?:$|\W)' 
-					if ( guest.name.search(re) == -1 && guest.nickname.search(re) == -1 ) { 
+					if ( guest.name.search(re) == -1) { 
 						return false
 					} else { 
 						return true 
@@ -302,6 +340,7 @@ export default {
 		}
 
 	},
+	//function for watching the change of the state in this component
 	watch:{
 		sortKey: function() {
 			this.resetPage()
@@ -334,10 +373,11 @@ export default {
 
 
 	// },
+	//this function will run when this component is created/ initialized
 	created(){
-		 this.getAllGuests(this.guests)
+		this.getAllGuests(this.guests)
 	},
-
+	//this function will run when this component is created/ finished with the create
 	mounted(){
 		//this.paginationComp = this.$parent.$refs.pagination
 		console.log('list mounted')
