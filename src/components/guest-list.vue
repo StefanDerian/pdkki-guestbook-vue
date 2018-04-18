@@ -4,19 +4,19 @@
 		<!-- Single button -->
 		<message :msg ="msg" :flag="flag"></message>
 		<div class="row">
-			<div class="search pull-right">
+			<div class="search col-md-3">
 
 				<div class = "form-group">
 					<label for = "search"> Search By Name:</label>
 					<input class="form-control" v-model = "keyword" name="search" id="search" type ="text" placeholder="search for ....">
 				</div>
 			</div>
-			<div class="search pull-right">
+			<div class="search col-md-3">
 				<div class = "checkbox">
 					<label><input type="checkbox" name="birthday" v-model="birthdayFilter">Show this month birthday only</label>
 				</div>
 			</div>
-			<div class="search pull-right">
+			<div class="search col-md-3">
 				Sort by:
 				<div class="btn-group dropdown">
 					<button type="button" class="btn btn-default btn-search dropdown-toggle"
@@ -36,14 +36,20 @@
 	<div class="row">
 		<div class="table-responsive">
 			<table class="table">
-				<tbody>
+				<thead class="thead-dark">
 					<tr>
 						<th>Name</th>
 						<!-- <th>Nick Name</th> -->
 						<th>Phone Number</th>
 						<th>Birthday</th>
+						<th>Birthday</th>
+						<th></th>
+						<th></th>
 						<!-- <th>Description</th> -->
 					</tr>
+				</thead>
+				<tbody>
+
 					<!-- ngRepeat: person in tempPeople | orderBy:myOrderBy -->
 					<tr align ="left" v-for="guest of computedGuest">
 						<td>{{guest.name}}</td>
@@ -390,7 +396,7 @@ export default {
 
 <style lang="css" scoped>
 table{
-	table-layout: fixed;
+	
 	white-space: normal;
 }
 td{
