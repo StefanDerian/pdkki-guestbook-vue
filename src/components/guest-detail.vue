@@ -8,7 +8,7 @@
 			<hr>
 			<h1>{{client.phone}}</h1>
 			<hr>
-			<h1>{{client.birthday}}</h1>
+			<h1>{{client.birthday.day}} {{client.birthday.month}} {{client.birthday.year}}</h1>
 			<hr>
 			<h1>{{client.description}}</h1>
 			<hr>

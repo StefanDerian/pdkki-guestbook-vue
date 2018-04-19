@@ -56,7 +56,7 @@
 						<!-- <td>{{guest.email}}</td> -->
 						<td>{{guest.phone}}</td>
 						<!-- kalau bisa birthdaynya tolong ganti format-->
-						<td>{{guest.birthday}}</td>
+						<td>{{guest.birthday.day}} {{guest.birthday.month}} {{guest.birthday.year}}</td>
 						<!-- <td class = "col-description">{{guest.description}}</td> -->
 						<td><button class = "btn btn-md btn-primary" @click="showDetailModal(guest)">View</button></td>
 						<td><button class = "btn btn-md btn-warning" @click="showEditModal(guest)">Edit</button></td>
@@ -281,7 +281,7 @@ export default {
 	},
 	// mix the getters into computed with object spread operator
 	computed: {
-		//mapping the things in vuex into this component
+		//mapping the things in vuex into this component from VUEX
 		...mapGetters([
 			'allGuests',
 			'getGuestsSize'
@@ -290,9 +290,9 @@ export default {
 			]),
 
 
-		//function for handling the sorting, searching, and keywords
+		//function for handling the sorting, searching, and keywords and also the list above generated from this function
 		computedGuest: function(){
-
+			//sortkey means the key used to compare for example based on created
 			var computedGuests = this.allGuests.sort(this.compareValues(this.sortKey))
 			let firstGuestIndex = this.firstGuestIndex
 			let lastGuestIndex = this.lastGuestIndex
@@ -304,10 +304,17 @@ export default {
 
 					var nowMonth = new Date()
 
-					nowMonth = nowMonth.getMonth()
+					
 
-					var guestMonth = new Date(guest['birthday'])
-					guestMonth = guestMonth.getMonth()
+					const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+					"Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+					];
+
+					nowMonth = monthNames[nowMonth.getMonth()]
+
+					var guestMonth = guest['birthday']['month']
+					console.log(nowMonth)
+					//guestMonth = guestMonth.getMonth()
 
 					return guestMonth === nowMonth
 
@@ -349,6 +356,8 @@ export default {
 	},
 	//function for watching the change of the state in this component
 	watch:{
+
+		//reseting every time the page get the variable changed
 		sortKey: function() {
 			this.resetPage()
 			
