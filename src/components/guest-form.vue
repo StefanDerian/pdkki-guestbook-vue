@@ -15,7 +15,7 @@
 					<label for="inputEmail3" class="col-md-3 col-sm-12 control-label">Full Name:</label>
 					<div class="col-md-6 col-sm-12">
 						<input type="text" v-validate="'required'"  name="name"  class="form-control" id="inputEmail3" v-model="client.name"  placeholder="Nama Lengkap ..." >
-						<span v-show="errors.has('name')" class="help is-danger">{{ errors.first('name') }}</span>
+						<span v-show="errors.has('name')" class="help text-danger">{{ errors.first('name') }}</span>
 					</div>
 				</div>
 				<div class="form-group row">
@@ -23,6 +23,7 @@
 					<div class="col-md-6 col-sm-12">
 						<input type="email" v-validate="'required|email'"  class="form-control " v-model="client.email" id="inputPassword3"  placeholder="Email mu...." >
 					</div>
+					<span v-show="errors.has('email')" class="help text-danger">{{ errors.first('email') }}</span>
 				</div>
 				<div class="form-group row">
 					<label for="inputPassword3" class="col-md-3 col-sm-12 control-label">Birthday:</label>
@@ -124,7 +125,7 @@
 						<label for="inputPassword3" class="col-md-3 col-sm-12 control-label">Phone Number:</label>
 						<div class="col-md-6 col-sm-12">
 							<input type="tel" name="phone" class="form-control " v-validate="'required|min:10|max:10|numeric'" v-model="client.phone" id="inputPassword3"  placeholder="Nomer telepon" >
-							<span v-show="errors.has('phone')" class="help is-danger">{{ errors.first('phone') }}</span>
+							<span v-show="errors.has('phone')" class="help text-danger">{{ errors.first('phone') }}</span>
 						</div>
 					</div>
 					<div class="form-group row">

@@ -1,6 +1,6 @@
 
 <template>
-	<div>
+	<div class = "container jumbotron guest-form-container">
 		
 		<message :msg ="msg" :flag="flag"></message>
 		<guest-form ref= "createForm" v-on:submit-form="onSubmit" :guest="client" type1="create"></guest-form>
@@ -69,5 +69,8 @@ export default {
 </script>
 
 <style lang="css" scoped>
+.guest-form-container{
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
 </style>
 </script>

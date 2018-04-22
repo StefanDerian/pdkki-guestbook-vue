@@ -2,16 +2,16 @@
 
 	<div>
 		<div class = "row">
-			<h1>{{client.name}}</h1>
-			<hr>
-			<h1>{{client.email}}</h1>
-			<hr>
-			<h1>{{client.phone}}</h1>
-			<hr>
-			<h1>{{client.birthday.day}} {{client.birthday.month}} {{client.birthday.year}}</h1>
-			<hr>
-			<h1>{{client.description}}</h1>
-			<hr>
+			<!-- make every row exist if the associated variable exist-->
+			<h1 v-if="client.name">{{client.name}}</h1>
+			<hr  v-if="client.email">
+			<h1 v-if="client.email">{{client.email}}</h1>
+			<hr v-if="client.phone">
+			<h1 v-if="client.phone">{{client.phone}}</h1>
+			<hr v-if="client.birthday.day">
+			<h1 v-if="client.birthday.day">{{client.birthday.day}} {{client.birthday.month}} {{client.birthday.year}}</h1>
+			<hr v-if="client.description">
+			<h1 v-if="client.description">{{client.description}}</h1>
 		</div>
 
 

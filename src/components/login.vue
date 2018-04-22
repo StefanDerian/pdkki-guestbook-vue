@@ -1,19 +1,26 @@
 <template>
+
 	<div>
+		<img src = "../assets/pdkki-gb-photo.jpg" class ="bg-img" >
 		<div class = "alert alert-danger" v-if="error!==''">{{error}}</div>
-		<div class = "container jumbotron login">
-			<form v-on:submit.prevent="onSubmit">
-				<div class = "form-group row">
-					<label class = "col-md-3" for="email">Email</label>
-					<input v-validate="'required|email'" id ="email" type="email" name="email" class="form-group col-md-3" v-model ="email" >
-					<span v-show="errors.has('email')" class="help is-danger">{{ errors.first('email') }}</span>
+		<div class = "container jumbotron login-container">
+			
+			<form v-on:submit.prevent="onSubmit" class = "form-horizontal">
+				<div class = "form-group">
+					<label class = "col-md-3 control-label login-label" for="email">Email</label>
+					<div class = "col-md-6">
+						<input v-validate="'required|email'" id ="email" type="email" name="email" class="form-control" v-model ="email" >
+						<span v-show="errors.has('email')" class="help text-danger">{{ errors.first('email') }}</span>
+					</div>
 				</div>
-				<div class = "form-group row">
-					<label class = "col-md-3" for="current-password">password</label>
-					<input  v-validate="'required'" id ="current-password" type="password" name="current-password" class="form-group col-md-3" v-model ="password" >
-					<span v-show="errors.has('current-password')" class="help is-danger">{{ errors.first('current-password') }}</span>
+				<div class = "form-group">
+					<label class = "col-md-3 control-label login-label" for="current-password">password</label>
+					<div class = "col-md-6">
+						<input  v-validate="'required'" id ="current-password" type="password" name="current-password" class="form-control" v-model ="password" >
+						<span v-show="errors.has('current-password')" class="help text-danger">{{ errors.first('current-password') }}</span>
+					</div>
 				</div>
-				<input type="submit" class="btn btn-primary btn-lg" value="login">
+				<input type="submit" class="btn btn-success btn-lg" value="login">
 			</form>
 		</div>
 		{{user}}
@@ -57,5 +64,41 @@ export default {
 }
 </script>
 
-<style lang="css" scoped>
+<style lang="css">
+.bg-img{
+	z-index: -246;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+
+
+}
+.login-container{
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	border:solid 1px #ffffff;
+	background: transparent;
+	
+}
+.login-label{
+	color: #ffffff;
+}
+.brand-image-container{
+	margin-bottom:20px;
+}
+@media screen and (min-width:415px){
+	.login-container{
+		margin-top:10%;
+		width: 50%;
+	}
+}
+/* adjust the height within dekstop ad mobile*/
+@media screen and (max-width:414px){
+	.login-container{
+		margin-top:30%;
+		width: 100%;
+	}
+
+}
 </style>

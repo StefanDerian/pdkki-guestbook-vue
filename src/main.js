@@ -33,8 +33,8 @@ import Firebase from 'firebase'
 // require('../node_modules/bootstrap/dist/js/bootstrap.min.js')
 // require('../node_modules/vue2-slot-calendar/lib/calendar.min.css')
 // require('../node_modules/vue2-slot-calendar/lib/calendar.min.js')
-
-
+//require('../node_modules/footable/css/footable.metro.css')
+require('../node_modules/footable/js/footable.js')
 
 
 
@@ -72,6 +72,7 @@ Vue.config.productionTip = false
 		},
 		beforeCreate(){
 			Firebase.auth().onAuthStateChanged((user) => {
+				
 				if (user) {
 					this.user = user
 					this.$router.replace('list')
