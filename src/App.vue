@@ -2,7 +2,6 @@
   <div id="app">
    <app-header></app-header>
     <router-view/>
-    <!-- <app-footer></app-footer> -->
   </div>
 </template>
 
@@ -10,12 +9,8 @@
 <script>
 import Header from './components/header.vue'
 import Footer from './components/footer.vue'
-import { mapState, mapMutations, mapActions } from 'vuex'
 import {db} from './mixin/firebase'
-import Firebase from 'firebase'
-
-
-
+ 
 export default {
   name: 'app',
   components:{
@@ -31,18 +26,6 @@ export default {
   firebase: {
     guests: db.ref('Guests')
   },
-  // methods: {
-  //   ...mapActions([
-  //     'getAllGuests', // map `this.increment()` to `this.$store.dispatch('increment')`
-  //     ]),
-
-  // },
-  // created(){
-  //   console.log('app created')
-
-  //   this.getAllGuests(this.guests)
-
-  // }
 }
 </script>
 

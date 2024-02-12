@@ -1,6 +1,21 @@
-# pdkki-guestbook-vue3
+# Project Overview
 
-> A Vue.js project
+> The project is for PDKKI Religious community to replace the guest books that was previously built upon excel. 
+> So instead of using the google form , we are making the guestbook so that the data can be centralised and be consumed by other instances when needed.
+
+
+
+## stack
+node 6
+Vue 2
+Firebase (NoSQL)
+
+
+## Future improvement
+> Containerise the application so that it can be flexibly be deployed anywhere 
+> add pipeline (eg. Github or Gitlab pipeline depend on where this will be finally hosted)
+> add comprehensive automated test to be added into the pipeline.
+
 
 ## Build Setup
 

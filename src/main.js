@@ -57,7 +57,7 @@ Vue.config.productionTip = false
 
 
 
-// Firebase.auth().onAuthStateChanged(function(user) {
+Firebase.auth().onAuthStateChanged(function(user) {
 
 
 	var vm = new Vue({
@@ -90,7 +90,7 @@ Vue.config.productionTip = false
 		},
 		render: h => h(App)
 	})
-// })
+})
 
 router.beforeEach((to,from,next) => {
 	let currentUser = vm.user
